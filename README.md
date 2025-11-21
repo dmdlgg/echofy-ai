@@ -4,6 +4,7 @@ Este projeto utiliza **IA generativa** para interpretar descrições em linguage
 A ferramenta entende intenções musicais — emoção, energia, contexto e até nacionalidade associada a gêneros — e retorna uma lista de músicas relevantes, podendo criar playlists e fazer análise de dados.
 
 ⚠️Aviso: Este projeto ainda está em desenvolvimento e novas funcionalidades serão adicionadas futuramente.
+
 ---
 
 ## 🚀 Funcionalidades
@@ -28,3 +29,11 @@ A primeira funcionalidade (que ainda está em desenvolvimento) é solicitar mús
 - **Postman** (para testes com a API)
 - **FastAPI** (para a criação da API que vai se comunicar com o front-end)
 - **React** (para a criação da interface)
+
+---
+## 📬 Contato
+
+Fique à vontade para entrar em contato caso tenha dúvidas, sugestões ou queira contribuir:
+  
+- 📨 **Email:** dumedolago@gmail.com 
+- 💻 **Linkedin:** [Eduardo Medolago](https://www.linkedin.com/in/eduardo-medolago-364288259/)
