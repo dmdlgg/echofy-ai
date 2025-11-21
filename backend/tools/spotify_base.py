@@ -25,4 +25,5 @@ def get_spotify_token():
         data=data
     )
 
+    print(response.json().get("access_token"))
     return response.json().get("access_token")
