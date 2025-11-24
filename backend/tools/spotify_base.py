@@ -26,3 +26,5 @@ def get_spotify_token():
     )
 
     return response.json().get("access_token")
+
+
