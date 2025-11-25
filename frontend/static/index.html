@@ -4,16 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat Echofy</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div id="chat"></div>
-    <form id="form">
-      <input type="text" id="input" placeholder="Digite sua pergunta..." required autocomplete="off" />
-      <button type="submit">Enviar</button>
+  <div class="fixed inset-0 w-full h-full flex flex-col border-none transition-colors duration-300">
+    <header class="flex items-center justify-between px-8 py-5 border-b border-green-200 dark:border-green-700 bg-white/80 dark:bg-gray-800/80 shadow-sm">
+      <h1 class="text-3xl font-extrabold text-green-700 dark:text-green-200 select-none tracking-tight">Echofy Chat</h1>
+    </header>
+    <div id="chat" class="flex-1 overflow-y-auto px-6 py-8 space-y-5 scrollbar-thin scrollbar-thumb-green-200 dark:scrollbar-thumb-green-900"></div>
+    <form id="form" class="flex gap-4 p-6 border-t border-green-100 dark:border-green-900 bg-white/80 dark:bg-gray-800/80">
+      <input type="text" id="input" placeholder="Digite sua pergunta..." required autocomplete="off"
+        class="flex-1 px-5 py-3 rounded-xl border border-green-300 dark:border-green-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-green-600 focus:bg-gray-50 dark:focus:bg-gray-800 transition-colors duration-200 shadow-sm" />
+      <button type="submit" class="px-7 py-3 rounded-xl bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white font-semibold shadow transition-colors duration-200">Enviar</button>
     </form>
   </div>
+  <!-- Marked.js para renderização de Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script type="module" src="chat.js"></script>
 </body>
 </html>
