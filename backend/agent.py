@@ -1,7 +1,6 @@
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
-from .tools.playlist_creator import create_playlist
-from dotenv import load_dotenv
+from .tools.playlist_sugestor import get_playlist_items
 
 
 # prompt para o agente
@@ -25,6 +24,4 @@ system_prompt = f"""
 """
 
 model = ChatOpenAI(model="gpt-4o-mini") 
-agent = create_agent(model=model, system_prompt=system_prompt, tools=[create_playlist])
-# result = agent.invoke({"messages": [{"role": "user", "content": "quero uma playlist de rock nacional dos anos 80"}]}) # teste de recomendações
-# print(result["messages"][-1].content) # printa apenas a resposta do agente
+agent = create_agent(model=model, system_prompt=system_prompt, tools=[get_playlist_items])
