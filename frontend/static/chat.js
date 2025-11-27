@@ -10,7 +10,6 @@ localStorage.setItem('theme', 'dark');
 
 
 function addMsg(msg, role) {
-  // Estrutura com avatar
   const wrapper = document.createElement('div');
   wrapper.className = role === 'user' ? 'usuario' : 'bot';
 
@@ -38,24 +37,46 @@ function addMsg(msg, role) {
   chat.scrollTop = chat.scrollHeight;
 }
 
+function addTypingIndicator() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'bot typing-wrapper';
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.textContent = '🤖';
+
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'typing-indicator';
+  typingDiv.innerHTML = '<span></span><span></span><span></span>';
+
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(typingDiv);
+  chat.appendChild(wrapper);
+  chat.scrollTop = chat.scrollHeight;
+  return wrapper;
+}
+
+function removeTypingIndicator(typingWrapper) {
+  if (typingWrapper && typingWrapper.parentNode) {
+    typingWrapper.parentNode.removeChild(typingWrapper);
+  }
+}
+
 form.onsubmit = async (e) => {
   e.preventDefault();
   const pergunta = input.value.trim();
   if (!pergunta) return;
   addMsg(pergunta, 'user');
   input.value = '';
-  addMsg('...', 'bot');
+ 
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  const typingWrapper = addTypingIndicator();
   try {
     const resposta = await sendToChatEndpoint(pergunta);
-    // Substitui a última mensagem do bot pelo markdown renderizado
-    const lastBot = chat.querySelector('.bot:last-child .mensagem');
-    if (lastBot && window.marked) {
-      lastBot.innerHTML = window.marked.parse(resposta);
-    } else if (lastBot) {
-      lastBot.textContent = resposta;
-    }
+    removeTypingIndicator(typingWrapper);
+    addMsg(resposta, 'bot');
   } catch {
-    const lastBot = chat.querySelector('.bot:last-child .mensagem');
-    if (lastBot) lastBot.textContent = 'Erro ao conectar ao backend.';
+    removeTypingIndicator(typingWrapper);
+    addMsg('Erro ao conectar ao backend.', 'bot');
   }
 };
