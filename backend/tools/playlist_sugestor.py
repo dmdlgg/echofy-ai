@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from langchain.tools import tool
 import json
 import requests
+import random
 
 def generate_consult(user_query):
     
@@ -62,7 +63,6 @@ def get_playlist_href(user_query):
         headers={"Authorization": f"Bearer {token}"}
     ).json()
 
-    print(search_url)
     href_playlist = request["playlists"]["href"]
     return href_playlist
 
@@ -77,7 +77,6 @@ def get_playlist_id(href):
     ).json()
 
     id = request["playlists"]["items"][0]["id"]
-
     print(id)
     return id
 
@@ -124,8 +123,9 @@ def get_playlist_items(user_query):
                 "artista": music_artist,
                 "popularity": music_popularity
             }
-            )
+        )
         
-        musics = sorted(musics, key=lambda x: x["popularity"], reverse=True)
+        #musics = sorted(musics, key=lambda x: x["popularity"], reverse=True)
+        if len(musics) > 50:
+            musics = random.sample(musics, 50)
     return musics
-
