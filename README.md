@@ -4,6 +4,7 @@ Este projeto utiliza Inteligência Artificial para interpretar descrições em l
 A ferramenta entende intenções musicais, emoção, energia, contexto e até nacionalidade associada a gêneros — e retorna uma lista de músicas relevantes.
 
 ⚠️: Este projeto ainda está em desenvolvimento e novas funcionalidades serão adicionadas futuramente.
+
 ---
 
 ## 🚀 Funcionalidades
