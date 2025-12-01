@@ -14,7 +14,7 @@ def generate_consult(user_query):
         Sua tarefa é transformar a solicitação do usuário em uma frase curta composta por 3 a 6 palavras-chave altamente relevantes, todas em minúsculas e separadas por '+'.
 
         REGRAS OBRIGATÓRIAS:
-        - Não invente informações.+
+        - Não invente informações.
         - Não inclua a palavra "musicas" ou "musica" no resultado final
         - Use conceitos presentes na consulta.
         - Se a consulta mencionar um país ou nacionalidade, inclua isso nas palavras-chave. 
