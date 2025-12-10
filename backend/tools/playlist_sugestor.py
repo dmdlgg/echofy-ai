@@ -9,22 +9,24 @@ def generate_consult(user_query):
     
     llm = ChatOpenAI(response_format={"type": "json_object"}, model="gpt-4o-mini")
     prompt = """
-        Você é um gerador de consultdas otimizadas para buscas na API do Spotify.
+        Você é um gerador de consultas otimizadas para buscas de playlists na API do Spotify.
 
-        Sua tarefa é transformar a solicitação do usuário em uma frase curta composta por 3 a 6 palavras-chave altamente relevantes, todas em minúsculas e separadas por '+'.
+        Sua tarefa é extrair palavras-chave relevantes da solicitação do usuário para encontrar a playlist ideal.
 
         REGRAS OBRIGATÓRIAS:
-        - Não invente informações.
-        - Não inclua a palavra "musicas" ou "musica" no resultado final
-        - Use conceitos presentes na consulta.
-        - Se a consulta mencionar um país ou nacionalidade, inclua isso nas palavras-chave. 
-        - Não adicionar verbos irrelevantes (ex.: "quero", "crie", "faça").
-        - Não use acentos.
+        - Extraia de 2 a 5 palavras-chave que descrevam o tema, mood, gênero ou contexto da playlist
+        - Remova todos os acentos e caracteres especiais
+        - Converta tudo para minúsculas
+        - Separe as palavras com '+' (sem espaços)
+        - NÃO inclua: "musica", "musicas", "playlist", verbos ("quero", "crie", "faça"), artigos ("uma", "para")
+        - SE houver menção a país/nacionalidade, SEMPRE inclua nas keywords
+        - SE houver menção a emoção/mood, SEMPRE inclua nas keywords
+        - Priorize: gênero musical, emoção/mood, atividade, estilo, época, nacionalidade
 
         FORMATO DO RETORNO:
-        Retorne um JSON com os campos:
+        Retorne APENAS um JSON válido:
         {
-            "keywords": "palavra1+palavra2+palavra+palavra4",
+            "keywords": "palavra1+palavra2+palavra3"
         }
 
         EXEMPLOS:
@@ -33,10 +35,19 @@ def generate_consult(user_query):
         Saída: {"keywords": "tristes+brasileiras"}
 
         Usuário: "quero uma playlist para aniversario infantil"
-        Saída: {"keywords": "aniversario+infantil"}
+        Saída: {"keywords": "aniversario+infantil+criancas"}
 
         Usuário: "quero uma playlist para treinar na academia"
-        Saída: {"keywords": "academia"}
+        Saída: {"keywords": "treino+academia+motivacao"}
+
+        Usuário: "playlist de rock dos anos 80"
+        Saída: {"keywords": "rock+anos+80"}
+
+        Usuário: "músicas calmas para estudar"
+        Saída: {"keywords": "calmas+estudar+foco"}
+
+        Usuário: "sertanejo romântico"
+        Saída: {"keywords": "sertanejo+romantico"}
     """
     response = llm.invoke(
         [
@@ -85,16 +96,27 @@ def get_playlist_id(href):
 def get_playlist_items(user_query):
 
     """
-    Esta ferramenta deve ser chamada para sugerir musicas para playlists
+    Use esta ferramenta quando o usuário solicitar sugestões de músicas, criação de playlist ou recomendações musicais baseadas em tema, mood ou contexto.
 
-    Esta ferramenta retorna sugestões de musicas para a criação de uma playlist
+    Exemplos de quando usar:
+    - "crie uma playlist de [tema/mood/gênero]"
+    - "sugira músicas [tema/mood/gênero]"
+    - "quero uma playlist para [atividade/ocasião]"
+    - "recomende músicas [tema/mood/gênero]"
+    - "playlist de [gênero] [características]"
 
-    Ela recebe a descrição do usuário, consulta a API do Spotify
-    e retorna um JSON contendo as músicas encontradas.
+    Args:
+        user_query: A consulta completa do usuário descrevendo o tipo de playlist desejada
 
-    O modelo NÃO deve tentar corrigir o JSON. 
-    O valor retornado por esta ferramenta deve ser entregue diretamente ao agente,
-    sem chamar novamente a ferramenta.
+    Returns:
+        JSON com lista de músicas contendo: nome, link do Spotify, artista e popularidade
+        Retorna até 50 músicas selecionadas aleatoriamente da playlist encontrada
+
+    IMPORTANTE:
+    - Chame esta ferramenta apenas UMA vez
+    - Use o JSON retornado exatamente como vem, sem modificações
+    - Não invente músicas ou artistas que não estejam no JSON
+    - Apresente as músicas de forma organizada ao usuário
     """
 
     playlist_id = get_playlist_id(user_query)
@@ -125,7 +147,6 @@ def get_playlist_items(user_query):
             }
         )
         
-        #musics = sorted(musics, key=lambda x: x["popularity"], reverse=True)
         if len(musics) > 50:
             musics = random.sample(musics, 50)
     return musics
