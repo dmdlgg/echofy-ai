@@ -79,11 +79,11 @@ def get_playlist_href(user_query: str) ->str:
     href_playlist = request["playlists"]["href"]
     return href_playlist
 
-def get_playlist_id(href: str) -> str:
+def get_playlist_id(user_query: str) -> str:
 
-    """Essa função pega o id da playlist usando o href dela"""
+    """Essa função pega o id de uma playlist"""
 
-    playlist_href = get_playlist_href(href)
+    playlist_href = get_playlist_href(user_query)
     token = get_spotify_token()
 
     request = requests.get(
@@ -92,7 +92,6 @@ def get_playlist_id(href: str) -> str:
     ).json()
 
     id = request["playlists"]["items"][0]["id"]
-    print(id)
     return id
 
 
@@ -100,7 +99,7 @@ def get_playlist_id(href: str) -> str:
 def get_playlist_items(user_query):
 
     """
-    Use esta ferramenta quando o usuário solicitar sugestões de músicas, criação de playlist ou recomendações musicais baseadas em tema, mood ou contexto.
+    Use esta ferramenta para sugestões de músicas baseadas em TEMA, MOOD, GÊNERO ou CONTEXTO (não artistas específicos).
 
     Exemplos de quando usar:
     - "crie uma playlist de [tema/mood/gênero]"
@@ -108,6 +107,9 @@ def get_playlist_items(user_query):
     - "quero uma playlist para [atividade/ocasião]"
     - "recomende músicas [tema/mood/gênero]"
     - "playlist de [gênero] [características]"
+    - "músicas tristes brasileiras"
+    - "playlist para treinar"
+    - "músicas para estudar"
 
     Args:
         user_query: A consulta completa do usuário descrevendo o tipo de playlist desejada
@@ -116,11 +118,11 @@ def get_playlist_items(user_query):
         JSON com lista de músicas contendo: nome, link do Spotify, artista e popularidade
         Retorna até 50 músicas selecionadas aleatoriamente da playlist encontrada
 
-    IMPORTANTE:
-    - Chame esta ferramenta apenas UMA vez
-    - Use o JSON retornado exatamente como vem, sem modificações
-    - Não invente músicas ou artistas que não estejam no JSON
-    - Apresente as músicas de forma organizada ao usuário
+    IMPORTANTE - QUANDO NÃO USAR:
+    - NÃO use esta ferramenta para informações sobre artistas específicos
+    - Para artistas específicos, use: get_artist_info, get_artist_albuns e get_artist_top_tracks
+    - Use APENAS quando o foco for tema/mood/gênero/contexto SEM mencionar artista específico
+    - Apresente as músicas de forma organizada com nome, artista e link clicável
     """
 
     playlist_id = get_playlist_id(user_query)

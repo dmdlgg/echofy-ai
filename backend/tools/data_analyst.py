@@ -70,11 +70,12 @@ def get_artist_id(query: str) -> str:
 
     return id
 
+
 @tool
 def get_artist_info(user_query: str) -> dict:
 
     """
-    Use esta ferramenta quando o usuário solicitar informações, dados ou detalhes sobre um artista específico.
+    Use esta ferramenta para obter informações básicas sobre um artista (nome, gêneros, popularidade, seguidores, imagem).
 
     Exemplos de quando usar:
     - "informações sobre [artista]"
@@ -89,10 +90,13 @@ def get_artist_info(user_query: str) -> dict:
     Returns:
         JSON completo com informações do artista: nome, gêneros, popularidade, seguidores, links e imagem
 
-    IMPORTANTE: 
-    - Chame esta ferramenta apenas UMA vez
-    - Use o JSON retornado exatamente como vem, sem modificações
-    - Não invente ou adicione informações que não estejam no JSON
+    IMPORTANTE - FLUXO COMPLEMENTAR:
+    - Quando o usuário pedir informações sobre um artista, SEMPRE chame TAMBÉM:
+      * get_artist_albuns (para mostrar a discografia)
+      * get_artist_top_tracks (para mostrar as músicas mais populares)
+    - Chame as 3 ferramentas juntas para dar uma resposta COMPLETA sobre o artista
+    - Use os dados EXATAMENTE como vêm dos JSONs, sem inventar informações
+    - Apresente tudo de forma organizada e visualmente agradável
     """
     
     artist = generate_artist_consult(user_query)
@@ -134,10 +138,10 @@ def get_artist_info(user_query: str) -> dict:
 def get_artist_albuns(user_query: str) -> dict:
 
     """
-    Use esta ferramenta quando para enriquecer informações sobre o artista solicitado pelo usuario.
+    Use esta ferramenta para obter a discografia completa (lista de álbuns) de um artista.
 
     Exemplos de quando usar:
-    - "me de informações sobre o [artista]"
+    - "me dê informações sobre o [artista]"
     - "álbuns do [artista]"
     - "discografia de [artista]"
     - "quais álbuns [artista] tem"
@@ -150,10 +154,13 @@ def get_artist_albuns(user_query: str) -> dict:
     Returns:
         JSON com lista de nomes de álbuns do artista
 
-    IMPORTANTE:
-    - Chame esta ferramenta apenas UMA vez
-    - Use o JSON retornado exatamente como vem, sem modificações
-    - Não invente ou adicione informações que não estejam no JSON
+    IMPORTANTE - FLUXO COMPLEMENTAR:
+    - Quando o usuário pedir informações sobre um artista, SEMPRE chame TAMBÉM:
+      * get_artist_info (para dados básicos: nome, gêneros, popularidade, seguidores)
+      * get_artist_top_tracks (para as músicas mais populares)
+    - Chame as 3 ferramentas juntas para dar uma resposta COMPLETA sobre o artista
+    - Use os dados EXATAMENTE como vêm dos JSONs, sem inventar informações
+    - Liste todos os álbuns retornados de forma organizada
     """
 
 
@@ -161,7 +168,7 @@ def get_artist_albuns(user_query: str) -> dict:
     id = get_artist_id(user_query)
 
     search_url = (
-        f"https://api.spotify.com/v1/artists/{id}/albums"
+        f"https://api.spotify.com/v1/artists/{id}/albums?include_groups=album"
     )
 
     request = requests.get(
@@ -176,3 +183,55 @@ def get_artist_albuns(user_query: str) -> dict:
 
     return {"albuns": albuns}
 
+@tool
+def get_artist_top_tracks(user_query: str) -> dict:
+
+    """
+    Use esta ferramenta para obter as músicas mais populares (top tracks) de um artista.
+
+    Exemplos de quando usar:
+    - "informações sobre [artista]"
+    - "me fale sobre [artista]"
+    - "músicas mais populares de [artista]"
+    - "top músicas do [artista]"
+    - "melhores músicas de [artista]"
+    - "hits de [artista]"
+
+    Args:
+        user_query: A consulta completa do usuário contendo o nome do artista
+
+    Returns:
+        JSON com dicionário de músicas mais populares: {nome_música: link_spotify}
+
+    IMPORTANTE - FLUXO COMPLEMENTAR:
+    - Quando o usuário pedir informações sobre um artista, SEMPRE chame TAMBÉM:
+      * get_artist_info (para dados básicos: nome, gêneros, popularidade, seguidores)
+      * get_artist_albuns (para a discografia completa)
+    - Chame as 3 ferramentas juntas para dar uma resposta COMPLETA sobre o artista
+    - Use os dados EXATAMENTE como vêm dos JSONs, sem inventar informações
+    - Apresente as músicas com seus links clicáveis do Spotify
+    """
+
+    token = get_spotify_token()
+    artist_id = get_artist_id(user_query)
+
+    search_url = (f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks")
+
+    request = requests.get(
+        search_url,
+        headers={"Authorization": f"Bearer {token}"}
+    ).json().get("tracks")
+
+    musics = {}
+
+    for item in request:
+
+        link = item.get("external_urls").get("spotify")
+        nome = item.get("name")
+
+        musics[nome] = link
+
+    return musics
+        
+
+    

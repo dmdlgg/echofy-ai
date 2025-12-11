@@ -172,11 +172,11 @@ body, .dark body {
 }
 
 #chat {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
 }
 
 #chat::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none; 
 }
 
 .mensagem a {
@@ -186,4 +186,75 @@ body, .dark body {
 
 .mensagem a:hover {
   text-decoration: underline;
+}
+
+.mensagem img {
+  max-width: 100%;
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  margin: 8px 0;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .mensagem img {
+    width: 150px;
+  }
+  
+  .usuario {
+    margin-left: 20px;
+  }
+  
+  .bot {
+    margin-right: 20px;
+  }
+  
+  .typing-wrapper {
+    margin-right: 20px;
+  }
+  
+  .mensagem {
+    max-width: 85%;
+    padding: 14px 18px;
+    font-size: 1rem;
+  }
+  
+  .usuario .avatar,
+  .bot .avatar {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mensagem img {
+    width: 120px;
+  }
+  
+  .usuario {
+    margin-left: 10px;
+  }
+  
+  .bot {
+    margin-right: 10px;
+  }
+  
+  .typing-wrapper {
+    margin-right: 10px;
+  }
+  
+  .mensagem {
+    max-width: 90%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+  
+  .usuario .avatar,
+  .bot .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
 }
