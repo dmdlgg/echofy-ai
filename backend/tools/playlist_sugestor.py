@@ -5,7 +5,7 @@ import json
 import requests
 import random
 
-def generate_consult(user_query):
+def generate_consult(user_query: str) -> dict:
     
     llm = ChatOpenAI(response_format={"type": "json_object"}, model="gpt-4o-mini")
     prompt = """
@@ -59,7 +59,9 @@ def generate_consult(user_query):
     print(response.content)
     return json.loads(response.content)
 
-def get_playlist_href(user_query):
+def get_playlist_href(user_query: str) ->str:
+
+    """Essa função é responsável por pegar o link de uma playlist existente"""
 
     consult = generate_consult(user_query)
     final_consult = consult.get("keywords")
@@ -77,7 +79,9 @@ def get_playlist_href(user_query):
     href_playlist = request["playlists"]["href"]
     return href_playlist
 
-def get_playlist_id(href):
+def get_playlist_id(href: str) -> str:
+
+    """Essa função pega o id da playlist usando o href dela"""
 
     playlist_href = get_playlist_href(href)
     token = get_spotify_token()

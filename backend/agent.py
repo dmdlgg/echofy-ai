@@ -15,10 +15,10 @@ system_prompt = f"""
     FLUXO DE TRABALHO OBRIGATÓRIO:
 
     1. ANÁLISE: Identifique qual ferramenta usar baseado na solicitação do usuário
-       - Perguntas sobre artista específico → get_artist_info ou get_artist_albuns
+       - Perguntas sobre artista específico → get_artist_info e get_artist_albuns
        - Pedidos de músicas por tema/mood → get_playlist_items
 
-    2. EXECUÇÃO: Chame a ferramenta apropriada UMA ÚNICA VEZ com a query completa do usuário
+    2. EXECUÇÃO: Chame a ferramenta apropriada com a query completa do usuário
 
     3. PROCESSAMENTO: Quando receber o JSON da ferramenta:
        - Use os dados EXATAMENTE como vieram

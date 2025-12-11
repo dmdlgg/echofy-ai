@@ -4,7 +4,7 @@ from langchain.tools import tool
 import requests
 
 
-def generate_artist_consult(user_query):
+def generate_artist_consult(user_query: str) -> str:
     
     llm = ChatOpenAI(model="gpt-4o-mini")
     prompt = """
@@ -49,7 +49,9 @@ def generate_artist_consult(user_query):
 
     return response.content
 
-def get_artist_id(query: str):
+def get_artist_id(query: str) -> str:
+
+    """essa função é reponsável por capturar o id do artista que o usuário vai enviar na consulta"""
 
     artist = generate_artist_consult(query)
     token = get_spotify_token()
@@ -69,7 +71,7 @@ def get_artist_id(query: str):
     return id
 
 @tool
-def get_artist_info(user_query: str):
+def get_artist_info(user_query: str) -> dict:
 
     """
     Use esta ferramenta quando o usuário solicitar informações, dados ou detalhes sobre um artista específico.
@@ -129,12 +131,13 @@ def get_artist_info(user_query: str):
 
 
 @tool
-def get_artist_albuns(user_query):
+def get_artist_albuns(user_query: str) -> dict:
 
     """
-    Use esta ferramenta quando o usuário solicitar álbuns, discografia ou lançamentos de um artista específico.
+    Use esta ferramenta quando para enriquecer informações sobre o artista solicitado pelo usuario.
 
     Exemplos de quando usar:
+    - "me de informações sobre o [artista]"
     - "álbuns do [artista]"
     - "discografia de [artista]"
     - "quais álbuns [artista] tem"
@@ -172,6 +175,4 @@ def get_artist_albuns(user_query):
         albuns.append(item.get("name"))
 
     return {"albuns": albuns}
-
-
 
