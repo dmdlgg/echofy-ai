@@ -25,7 +25,7 @@ A ferramenta entende intenções musicais, emoção, energia, contexto e até na
 - **API da OpenAI com gpt-4o-mini**
 - **Spotify Web API**
 - **FastAPI**
-- **Javascript**
+- **Typescript**
 
 ---
 ## 📬 Contato
