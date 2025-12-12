@@ -7,14 +7,10 @@ A ferramenta entende intenções musicais, emoção, energia, contexto e até na
 
 ---
 
-## 🚀 Funcionalidades
+## 🚀 Funcionalidades (até o momento)
 
-- Processa descrições como:  
-  _"quero músicas tristes e calmas para estudar do Brasil"_
-- Converte o pedido em **palavras-chave inteligentes** usando IA.
-- Mapeia países para **gêneros musicais reais** (ex.: Brasil → MPB, samba, funk carioca).
-- Busca músicas usando a **API do Spotify**.
-- Retorna **nomes das músicas** e **links para cada faixa**.
+- Sugestão de musicas para criação playlists com consulta inteligente processada por IA;
+- Fornecimento de informações sobre artistas, incluindo músicas e álbuns
 
 ---
 
@@ -24,7 +20,7 @@ A ferramenta entende intenções musicais, emoção, energia, contexto e até na
 - **LangChain**
 - **API da OpenAI com gpt-4o-mini**
 - **Spotify Web API**
-- **FastAPI**
+- **Flask**
 - **Typescript**
 
 ---
