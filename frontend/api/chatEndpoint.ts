@@ -13,3 +13,10 @@ export async function sendToChatEndpoint(pergunta: string): Promise<string> {
   const data: ChatResponse = await resp.json();
   return data.reply || '(Sem resposta)';
 }
+
+export async function clearHistoryEndpoint(): Promise<void> {
+  await fetch('http://localhost:8000/chat/clear', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  });
+}

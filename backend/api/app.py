@@ -29,7 +29,7 @@ def chat_endpoint():
 	
 	return jsonify({"reply": reply})
 
-@app.route("/chat/clear", methods=["POST"])
+@app.route("/chat/clear", methods=["DELETE"])
 def clear_history():
 	"""Endpoint para limpar o histórico de conversa"""
 	global conversation_history

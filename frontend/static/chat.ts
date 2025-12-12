@@ -1,4 +1,4 @@
-import { sendToChatEndpoint } from '../api/chatEndpoint';
+import { sendToChatEndpoint, clearHistoryEndpoint } from '../api/chatEndpoint';
 
 declare global {
   interface Window {
@@ -11,6 +11,8 @@ declare global {
 const chat = document.getElementById('chat') as HTMLDivElement;
 const form = document.getElementById('form') as HTMLFormElement;
 const input = document.getElementById('input') as HTMLInputElement;
+const clearBtn = document.getElementById('clearBtn') as HTMLButtonElement;
+
 
 document.documentElement.classList.add('dark');
 localStorage.setItem('theme', 'dark');
@@ -86,3 +88,10 @@ form.onsubmit = async (e: SubmitEvent): Promise<void> => {
     addMsg('Erro ao conectar ao backend.', 'bot');
   }
 };
+
+async function clearHistory() {
+  await clearHistoryEndpoint();
+  console.log("historico limpo")
+}
+
+clearBtn.addEventListener("click", clearHistory)
