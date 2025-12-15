@@ -203,6 +203,13 @@ echofy-ai/
 └── README.md
 ```
 
+## 📬 Contato
+
+Fique à vontade para entrar em contato caso tenha dúvidas, sugestões ou queira contribuir:
+  
+- 📨 **Email:** dumedolago@gmail.com 
+- 💻 **Linkedin:** [Eduardo Medolago](https://www.linkedin.com/in/eduardo-medolago-364288259/)
+
 
 
 
