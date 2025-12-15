@@ -3,8 +3,8 @@ interface ChatResponse {
   reply?: string;
 }
 
-// URL da API - usar variável de ambiente ou localhost para desenvolvimento
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
+const API_URL =  'http://localhost:8000';
 
 // função para enviar mensagem ao backend
 export async function sendToChatEndpoint(pergunta: string): Promise<string> {
