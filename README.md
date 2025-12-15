@@ -9,7 +9,7 @@ Vcoê pode acessar o deploy do agente em: https://echofy-ai.vercel.app/
 - 🎶 **Top Músicas**: Descubra as músicas mais populares de cada artista
 - 🎧 **Recomendações Personalizadas**: Receba sugestões de playlists baseadas em humor, gênero ou atividade
 - 💬 **Interface de Chat Interativa**: Converse naturalmente com o assistente através de uma interface web moderna
-- 
+  
 ## 🏗️ Arquitetura
 
 O projeto é dividido em duas partes principais:
