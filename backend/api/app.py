@@ -1,10 +1,14 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from backend.agent import agent
 
 app = Flask(__name__)
 
-CORS(app, origins="*", supports_credentials=False)
+# Configuração de CORS para produção
+# Em produção, deve-se especificar as origens permitidas
+allowed_origins = os.getenv('ALLOWED_ORIGINS', '*').split(',')
+CORS(app, origins=allowed_origins, supports_credentials=False)
 
 
 conversation_history = []
@@ -35,5 +39,12 @@ def clear_history():
 	conversation_history = []
 	return jsonify({"message": "Histórico limpo com sucesso"})
 
+@app.route("/health", methods=["GET"])
+def health_check():
+	"""Endpoint para health check do serviço"""
+	return jsonify({"status": "healthy", "service": "echofy-ai"}), 200
+
 if __name__ == "__main__":
+	# Modo de desenvolvimento
+	# Em produção, use gunicorn
 	app.run(debug=True, host="0.0.0.0", port=8000)

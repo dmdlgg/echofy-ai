@@ -3,9 +3,12 @@ interface ChatResponse {
   reply?: string;
 }
 
+// URL da API - usar variável de ambiente ou localhost para desenvolvimento
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 // função para enviar mensagem ao backend
 export async function sendToChatEndpoint(pergunta: string): Promise<string> {
-  const resp = await fetch('http://localhost:8000/chat', {
+  const resp = await fetch(`${API_URL}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: pergunta })
@@ -15,7 +18,7 @@ export async function sendToChatEndpoint(pergunta: string): Promise<string> {
 }
 
 export async function clearHistoryEndpoint(): Promise<void> {
-  await fetch('http://localhost:8000/chat/clear', {
+  await fetch(`${API_URL}/chat/clear`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
   });

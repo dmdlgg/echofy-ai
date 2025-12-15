@@ -1,4 +1,25 @@
+# Python
 /venv
-.env
+*.pyc
+__pycache__/
 .ruff_cache
+
+# Environment variables
+.env
+.env.local
+
+# Node
 /node_modules
+frontend/node_modules
+frontend/dist
+frontend/.env.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
