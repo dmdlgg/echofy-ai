@@ -1,7 +1,7 @@
 # 🎵 Echofy AI
 
 Um assistente inteligente especializado em música do Spotify, construído com LangChain e integração com a API do Spotify. O Echofy AI fornece informações detalhadas sobre artistas, álbuns, músicas e recomendações personalizadas baseadas em humor e preferências musicais.
-
+Vcoê pode acessar o deploy do agente em: https://echofy-ai.vercel.app/
 ## ✨ Funcionalidades
 
 - 🎤 **Informações de Artistas**: Obtenha dados completos sobre artistas, incluindo gêneros, popularidade, seguidores e links do Spotify
