@@ -5,9 +5,8 @@ from backend.agent import agent
 
 app = Flask(__name__)
 
-# Configuração de CORS para produção
-# Em produção, deve-se especificar as origens permitidas
-allowed_origins = os.getenv('ALLOWED_ORIGINS', '*').split(',')
+
+allowed_origins = os.getenv('ALLOWED_ORIGINS').split(',')
 CORS(app, origins=allowed_origins, supports_credentials=False)
 
 
@@ -15,6 +14,7 @@ conversation_history = []
 
 @app.route("/chat", methods=["POST"])
 def chat_endpoint():
+	"""Endpoint principal para conversa com o agente"""
 	global conversation_history
 	
 	data = request.get_json()
@@ -45,6 +45,4 @@ def health_check():
 	return jsonify({"status": "healthy", "service": "echofy-ai"}), 200
 
 if __name__ == "__main__":
-	# Modo de desenvolvimento
-	# Em produção, use gunicorn
 	app.run(debug=True, host="0.0.0.0", port=8000)
