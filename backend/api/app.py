@@ -4,8 +4,7 @@ from backend.agent import agent
 
 app = Flask(__name__)
 
-CORS(app, origins=["http://127.0.0.1:3000", "http://localhost:3000"], 
-     supports_credentials=True)
+CORS(app, origins="*", supports_credentials=False)
 
 
 conversation_history = []
