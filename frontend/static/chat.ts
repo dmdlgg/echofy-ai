@@ -14,9 +14,6 @@ const input = document.getElementById('input') as HTMLInputElement;
 const clearBtn = document.getElementById('clearBtn') as HTMLButtonElement;
 
 
-document.documentElement.classList.add('dark');
-localStorage.setItem('theme', 'dark');
-
 function addMsg(msg: string, role: 'user' | 'bot'): void {
   const wrapper = document.createElement('div');
   wrapper.className = role === 'user' ? 'usuario' : 'bot';
