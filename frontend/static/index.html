@@ -5,26 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat Echofy</title>
   <link rel="icon" type="image/png" href="../assets/echofy-ai-logo.png">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-    };
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="fixed inset-0 w-full h-full flex flex-col border-none transition-colors duration-300">
-    <header class="flex items-center justify-between px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 border-b border-green-200 dark:border-green-700 bg-white/80 dark:bg-gray-800/80 shadow-sm">
-      <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-green-700 dark:text-green-200 select-none tracking-tight">Echofy Chat</h1>
-      <button type="submit" id="clearBtn" class="px-3 py-2 sm:px-5 sm:py-2.5 md:px-7 md:py-3 rounded-lg sm:rounded-xl bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white text-sm sm:text-base font-semibold shadow transition-colors duration-200 whitespace-nowrap">Limpar histórico</button>
+    <header class="relative flex items-center justify-between gap-2 px-3 sm:px-4 md:px-8 py-3 sm:py-4">
+      <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-green-400 select-none tracking-tight">Echofy Chat</h1>
+      
+      <button type="button" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <div class="hidden md:flex flex-wrap gap-4">
+        <button type="button" id="howToUseBtn" class="px-2 py-1.5 text-gray-300 hover:text-green-400 text-sm font-semibold transition-colors duration-200 whitespace-nowrap">Como usar</button>
+        <button type="button" id="clearChatBtn" class="px-2 py-1.5 text-gray-300 hover:text-green-400 text-sm font-semibold transition-colors duration-200 whitespace-nowrap">Limpar Chat</button>
+        <button type="button" id="clearHistoryBtn" class="px-2 py-1.5 text-gray-300 hover:text-green-400 text-sm font-semibold transition-colors duration-200 whitespace-nowrap">Limpar Histórico</button>
+      </div>
+
+
+      <div id="mobileMenu" class="hidden absolute top-full right-3 mt-2 w-48 bg-gray-900 border border-green-600 rounded-lg shadow-lg z-50">
+        <button type="button" id="howToUseBtnMobile" class="w-full text-left px-4 py-3 text-white hover:bg-gray-800 transition-colors duration-200 rounded-t-lg border-b border-gray-700">Como usar</button>
+        <button type="button" id="clearChatBtnMobile" class="w-full text-left px-4 py-3 text-white hover:bg-gray-800 transition-colors duration-200 border-b border-gray-700">Limpar Chat</button>
+        <button type="button" id="clearHistoryBtnMobile" class="w-full text-left px-4 py-3 text-white hover:bg-gray-800 transition-colors duration-200 rounded-b-lg">Limpar Histórico</button>
+      </div>
     </header>
-    <div id="chat" class="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 space-y-5 scrollbar-thin scrollbar-thumb-green-200 dark:scrollbar-thumb-green-900"></div>
-    <form id="form" class="flex gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 md:p-6 border-t border-green-100 dark:border-green-900 bg-white/80 dark:bg-gray-800/80">
+    <div id="chat" class="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 space-y-5 scrollbar-thin scrollbar-thumb-green-900"></div>
+    <form id="form" class="flex gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 md:p-6">
       <input type="text" id="input" placeholder="Digite sua pergunta..." required autocomplete="off"
-        class="flex-1 min-w-0 px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 rounded-lg sm:rounded-xl border border-green-300 dark:border-green-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-sm sm:text-base focus:outline-none focus:border-green-600 focus:bg-gray-50 dark:focus:bg-gray-800 transition-colors duration-200 shadow-sm" />
-      <button type="submit" class="px-4 py-2 sm:px-5 sm:py-2.5 md:px-7 md:py-3 rounded-lg sm:rounded-xl bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white text-sm sm:text-base font-semibold shadow transition-colors duration-200 whitespace-nowrap flex-shrink-0">Enviar</button>
+        class="flex-1 min-w-0 px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 rounded-lg sm:rounded-xl border border-gray-700 bg-gray-800 text-gray-100 text-sm sm:text-base focus:outline-none focus:border-green-600 focus:bg-gray-700 transition-colors duration-200 shadow-sm placeholder-gray-400" />
+      <button type="submit" class="px-4 py-2 sm:px-5 sm:py-2.5 md:px-7 md:py-3 rounded-lg sm:rounded-xl bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white text-sm sm:text-base font-semibold shadow transition-colors duration-200 whitespace-nowrap flex-shrink-0">Enviar</button>
     </form>
+  </div>
+
+  <div id="howToUseModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+    <div class="bg-gray-900 border-2 border-green-600 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-green-400">Como usar o Echofy Chat</h2>
+        <button id="closeModalBtn" class="text-gray-400 hover:text-white text-2xl font-bold">&times;</button>
+      </div>
+      <div class="text-gray-200 space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold text-green-400 mb-2">🎵 O que é o Echofy?</h3>
+          <p>O Echofy é um assistente inteligente que ajuda você a descobrir e gerenciar suas músicas no Spotify usando inteligência artificial.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-green-400 mb-2">💬 Como conversar?</h3>
+          <ul class="list-disc list-inside space-y-2 ml-2">
+            <li>Digite sua pergunta ou comando no campo de texto</li>
+            <li>Pressione Enter ou clique em "Enviar"</li>
+            <li>Aguarde a resposta do assistente</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-green-400 mb-2">✨ O que posso fazer?</h3>
+          <ul class="list-disc list-inside space-y-2 ml-2">
+            <li><strong>Pedir recomendações:</strong> "Me recomende músicas de rock"</li>
+            <li><strong>Analisar dados:</strong> "Quais são minhas top 10 músicas?"</li>
+            <li><strong>Criar playlists:</strong> "Crie uma playlist de exercícios"</li>
+            <li><strong>Descobrir artistas:</strong> "Me mostre artistas similares ao Radiohead"</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-green-400 mb-2">🛠️ Botões disponíveis</h3>
+          <ul class="list-disc list-inside space-y-2 ml-2">
+            <li><strong class="text-green-600">Como usar:</strong> Exibe estas informações</li>
+            <li><strong class="text-green-600">Limpar Chat:</strong> Remove as mensagens da tela</li>
+            <li><strong class="text-green-600">Limpar Histórico:</strong> Apaga o histórico de conversa do servidor</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button id="closeModalBtn2" class="px-6 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors duration-200">Entendi!</button>
+      </div>
+    </div>
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

@@ -1,6 +1,6 @@
 
 body, .dark body {
-  background: #000 !important;
+  background: #141414 !important;
   color: #fff;
 }
 
@@ -57,7 +57,6 @@ body, .dark body {
   box-shadow: 0 2px 12px #4caf5033;
   margin-bottom: 2px;
   position: relative;
-  border: 2px solid #4caf50;
   background: #111;
   color: #fff;
   animation: fadeIn 0.5s ease-out;
@@ -67,7 +66,6 @@ body, .dark body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  margin-left: 40px;
   margin-bottom: 12px;
   gap: 0.5rem;
   animation: slideInUser 0.5s ease-out;
@@ -80,25 +78,11 @@ body, .dark body {
   border-top-right-radius: 1.5rem;
   border-top-left-radius: 1.5rem;
 }
-.usuario .avatar {
-  width: 40px;
-  height: 40px;
-  background: #4caf50;
-  color: #000;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  box-shadow: 0 1px 6px #4caf5055;
-}
 
 .bot {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  margin-right: 40px;
   margin-bottom: 12px;
   gap: 0.5rem;
   animation: slideInBot 0.5s ease-out;
@@ -106,31 +90,16 @@ body, .dark body {
 .bot .mensagem {
   background: #333;
   color: #fff;
-  border: 2px solid #4caf50;
   border-bottom-left-radius: 0.4rem;
   border-bottom-right-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
   border-top-left-radius: 1.5rem;
-}
-.bot .avatar {
-  width: 40px;
-  height: 40px;
-  background: #4caf50;
-  color: #000;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  box-shadow: 0 1px 6px #4caf5055;
 }
 
 .typing-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  margin-right: 40px;
   margin-bottom: 12px;
   gap: 0.5rem;
   animation: slideInBot 0.5s ease-out;
@@ -171,8 +140,17 @@ body, .dark body {
   animation-delay: 0.4s;
 }
 
+#form {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 #chat {
-  scrollbar-width: none; 
+  scrollbar-width: none;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 #chat::-webkit-scrollbar {
@@ -202,47 +180,17 @@ body, .dark body {
     width: 150px;
   }
   
-  .usuario {
-    margin-left: 12px;
-  }
-  
-  .bot {
-    margin-right: 12px;
-  }
-  
-  .typing-wrapper {
-    margin-right: 12px;
-  }
-  
   .mensagem {
     max-width: 88%;
     padding: 12px 16px;
     font-size: 0.92rem;
   }
   
-  .usuario .avatar,
-  .bot .avatar {
-    width: 34px;
-    height: 34px;
-    font-size: 0.95rem;
-  }
 }
 
 @media (max-width: 480px) {
   .mensagem img {
     width: 120px;
-  }
-  
-  .usuario {
-    margin-left: 8px;
-  }
-  
-  .bot {
-    margin-right: 8px;
-  }
-  
-  .typing-wrapper {
-    margin-right: 8px;
   }
   
   .mensagem {
@@ -251,29 +199,11 @@ body, .dark body {
     font-size: 0.9rem;
   }
   
-  .usuario .avatar,
-  .bot .avatar {
-    width: 30px;
-    height: 30px;
-    font-size: 0.85rem;
-  }
 }
 
 @media (max-width: 360px) {
   .mensagem img {
     width: 100px;
-  }
-  
-  .usuario {
-    margin-left: 4px;
-  }
-  
-  .bot {
-    margin-right: 4px;
-  }
-  
-  .typing-wrapper {
-    margin-right: 4px;
   }
   
   .mensagem {
@@ -282,10 +212,4 @@ body, .dark body {
     font-size: 0.88rem;
   }
   
-  .usuario .avatar,
-  .bot .avatar {
-    width: 28px;
-    height: 28px;
-    font-size: 0.8rem;
-  }
 }
