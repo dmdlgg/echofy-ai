@@ -58,7 +58,6 @@ function addTypingIndicator(): HTMLDivElement {
 
   const avatar = document.createElement('div');
   avatar.className = 'avatar';
-  avatar.textContent = '🤖';
 
   const typingDiv = document.createElement('div');
   typingDiv.className = 'typing-indicator';
